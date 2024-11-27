@@ -3,11 +3,13 @@ import React from 'react';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Registration from '../screens/registration/Registration';
 import NewsNavigation from './NewsNavigation';
 import TravelsNavigation from './TravelsNavigation';
 import ProfileNavigation from './ProfileNavigation';
 import SettingsNavigation from './SettingsNavigation';
+import Ionicons from 'react-native-vector-icons/SimpleLineIcons';
+// import Ionicons from '@react-native-vector-icons/ionicons';
+
 
 const Tab = createBottomTabNavigator();
 
@@ -19,7 +21,7 @@ function AppNavigation(): React.JSX.Element {
             screenOptions={{
               headerShown: false,
               tabBarLabelStyle: {
-                fontSize: 20,
+                fontSize: 16,
                 color: 'red',
               },
             }}
@@ -36,6 +38,7 @@ function AppNavigation(): React.JSX.Element {
               component={TravelsNavigation}
               options={{
                 tabBarLabel: 'Travels',
+                tabBarIcon: () => <Ionicons name="plane" size={22} />,
               }}
             />
             <Tab.Screen
