@@ -3,28 +3,17 @@ import React from 'react';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-// import type {PropsWithChildren} from 'react';
-import {
-  // SafeAreaView,
-  // ScrollView,
-  StatusBar,
-  StyleSheet,
-  // Text,
-  // useColorScheme,
-  View,
-} from 'react-native';
-import {
-  // Colors,
-} from 'react-native/Libraries/NewAppScreen';
+import { StatusBar } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Registration from './src/screens/registration/Registration';
+import AppNavigation from './src/navigation/AppNavigation';
 
 const Tab = createBottomTabNavigator();
 
 function App(): React.JSX.Element {
   const backgroundStyle = {
     flex: 1,
-    backgroundColor: 'transparent', 
+    backgroundColor: 'transparent',
   };
 
   return (
@@ -32,38 +21,9 @@ function App(): React.JSX.Element {
       <StatusBar
         backgroundColor={backgroundStyle.backgroundColor}
       />
-
-        {/* <Text>jofvigb</Text> */}
-        <NavigationContainer>
-          <Tab.Navigator
-            screenOptions={{
-              headerShown: false,
-              tabBarLabelStyle: {
-                fontSize: 20,
-                color: 'red',
-              },
-            }}
-          >
-            <Tab.Screen
-              name="News"
-              component={Registration}
-              options={{
-                tabBarLabel: 'News',
-              }}
-            />
-            <Tab.Screen
-              name="News2"
-              component={Registration}
-              options={{
-                tabBarLabel: 'News2',
-              }}
-            />
-          </Tab.Navigator>
-        </NavigationContainer>
-
+    <AppNavigation />
     </SafeAreaView>
   );
 }
-
 
 export default App;
