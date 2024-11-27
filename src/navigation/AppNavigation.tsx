@@ -4,6 +4,10 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Registration from '../screens/registration/Registration';
+import NewsNavigation from './NewsNavigation';
+import TravelsNavigation from './TravelsNavigation';
+import ProfileNavigation from './ProfileNavigation';
+import SettingsNavigation from './SettingsNavigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -22,28 +26,28 @@ function AppNavigation(): React.JSX.Element {
           >
             <Tab.Screen
               name="News"
-              component={Registration}
+              component={NewsNavigation}
               options={{
                 tabBarLabel: 'News',
               }}
             />
             <Tab.Screen
               name="Travels"
-              component={Registration}
+              component={TravelsNavigation}
               options={{
                 tabBarLabel: 'Travels',
               }}
             />
             <Tab.Screen
               name="Profile"
-              component={Registration}
+              component={ProfileNavigation}
               options={{
                 tabBarLabel: 'Profile',
               }}
             />
             <Tab.Screen
               name="Settings"
-              component={Registration}
+              component={SettingsNavigation}
               options={{
                 tabBarLabel: 'Settings',
               }}
