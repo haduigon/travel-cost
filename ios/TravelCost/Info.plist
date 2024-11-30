@@ -50,6 +50,7 @@
 <array>
     <string>Ionicons.ttf</string>
     <string>SimpleLineIcons.ttf</string>
+    <string>MaterialCommunityIcons.ttf</string>
 </array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
