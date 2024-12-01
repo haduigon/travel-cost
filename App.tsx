@@ -2,7 +2,7 @@
 import React from 'react';
 import 'react-native-gesture-handler';
 import { StatusBar } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native';
 import AppNavigation from './src/navigation/AppNavigation';
 
 function App(): React.JSX.Element {
