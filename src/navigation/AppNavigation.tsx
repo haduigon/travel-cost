@@ -12,6 +12,7 @@ import Ionicons2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import { View, Text, StyleSheet } from 'react-native';
 import Logo from '../assets/Logo.svg';
 
+
 function icon(color: string) {
     return (
       <Ionicons2 name="newspaper-variant-outline" size={50} color={color} />
@@ -22,12 +23,12 @@ function icon2(color: string, name: string) {
     return (
       <Ionicons name={name} size={40} color={color} />
     );
-  }
+}
+  
 
 const Tab = createBottomTabNavigator();
 
 function AppNavigation(): React.JSX.Element {
-
 
   return (
     <NavigationContainer>
