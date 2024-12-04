@@ -1,13 +1,17 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-// import { useNavigation } from '@react-navigation/native';
-// import Ionicons from 'react-native-vector-icons/Ionicons';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import Logo from '../../assets/Logo.svg';
+// import { RouteProp } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
+type StackParamList = {
+  News: {route: string, item: any};
+}
 
-function NewsItem({ route }): React.JSX.Element {
-  
-  // const navigation = useNavigation();
+type NewsItemProps = NativeStackScreenProps<StackParamList, 'News'>;
+
+function NewsItem({ route}: NewsItemProps): React.JSX.Element {
+
   const item = route.params.item;
   return (
     <View style={styles.box}>
