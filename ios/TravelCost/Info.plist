@@ -51,6 +51,9 @@
     <string>Ionicons.ttf</string>
     <string>SimpleLineIcons.ttf</string>
     <string>MaterialCommunityIcons.ttf</string>
+    <string>MaterialIcons.ttf</string>
+    <string>Fontisto.ttf</string>
+    <string>AntDesign.ttf</string>
 </array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>

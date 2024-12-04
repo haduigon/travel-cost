@@ -1,13 +1,18 @@
 /** eslint-disable */
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, FlatList, Image} from 'react-native';
+import {View, Text, StyleSheet, FlatList, Image, TouchableOpacity} from 'react-native';
 import Logo from '../../assets/Logo.svg';
 
 const API_KEY = '74240d0d45984f26a208276b1614598a';
 
-function listItem({item, index}: {item: any; index: number}) {
+function listItem({item, index, navigation}: {item: any; index: number, navigation: any}) {
   const isLeft = index % 2 === 1;
   return (
+    <TouchableOpacity
+    onPress={() => {
+      navigation.navigate('News', {item: item});
+    }}
+    >
     <View style={[styles.newsBox, isLeft && {flexDirection: 'row-reverse'}]}>
       <Text style={styles.text}>{item.description}</Text>
       {item.urlToImage ? (
@@ -15,11 +20,12 @@ function listItem({item, index}: {item: any; index: number}) {
       ) : (
         <Logo width={40} height={40} />
       )}
-    </View>
+      </View>
+      </TouchableOpacity>
   );
 }
 
-export default function HomeScreen(): React.JSX.Element {
+export default function HomeScreen({navigation}: any): React.JSX.Element {
   const [news, setNews] = useState([] as any);
   const [_loading, setLoading] = useState(true);
 
@@ -49,7 +55,7 @@ export default function HomeScreen(): React.JSX.Element {
     <View style={styles.box}>
       <FlatList
         data={news}
-        renderItem={({item, index}) => listItem({item, index})}
+        renderItem={({item, index}) => listItem({item, index, navigation})}
         keyExtractor={item => item.title}
       />
     </View>
@@ -60,7 +66,7 @@ const styles = StyleSheet.create({
   box: {
     flex: 1,
     alignItems: 'center',
-    marginTop: 120,
+    marginTop: 20,
   },
   logoBox: {
     marginTop: 20,

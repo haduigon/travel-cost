@@ -13,13 +13,13 @@ import { View, Text, StyleSheet } from 'react-native';
 import Logo from '../assets/Logo.svg';
 
 
-function icon(color: string) {
+export function icon(color: string) {
     return (
       <Ionicons2 name="newspaper-variant-outline" size={50} color={color} />
     );
   }
   
-function icon2(color: string, name: string) {
+export function icon2(color: string, name: string) {
     return (
       <Ionicons name={name} size={40} color={color} />
     );
@@ -31,7 +31,16 @@ const Tab = createBottomTabNavigator();
 function AppNavigation(): React.JSX.Element {
 
   return (
-    <NavigationContainer>
+    <NavigationContainer >
+      <View
+        style={{
+          alignItems: 'center',
+          justifyContent: 'center',
+          // backgroundColor: 'none',
+          backgroundColor: '#fff',
+       }}
+      ><Logo width={80} height={80} /></View>
+
       <Tab.Navigator
         screenOptions={({route}) => ({
           tabBarActiveTintColor: '#F20100',
@@ -62,7 +71,8 @@ function AppNavigation(): React.JSX.Element {
           component={NewsNavigation}
           options={{
             tabBarLabel: 'News',
-            tabBarIcon: ({color}) => (icon(color)),
+            tabBarIcon: ({ color }) => (icon(color)),
+            headerShown: false,
           }}
         />
         <Tab.Screen
@@ -70,7 +80,8 @@ function AppNavigation(): React.JSX.Element {
           component={TravelsNavigation}
           options={{
             tabBarLabel: 'Travels',
-            tabBarIcon: ({color}) => icon2(color, 'plane'),
+            tabBarIcon: ({ color }) => icon2(color, 'plane'),
+            headerShown: false,
           }}
         />
         <Tab.Screen
@@ -78,7 +89,8 @@ function AppNavigation(): React.JSX.Element {
           component={ProfileNavigation}
           options={{
             tabBarLabel: 'Profile',
-            tabBarIcon: ({color}) => icon2(color, 'user'),
+            tabBarIcon: ({ color }) => icon2(color, 'user'),
+            headerShown: false,
           }}
         />
         <Tab.Screen
@@ -86,7 +98,8 @@ function AppNavigation(): React.JSX.Element {
           component={SettingsNavigation}
           options={{
             tabBarLabel: 'Settings',
-            tabBarIcon: ({color}) => icon2(color, 'settings'),
+            tabBarIcon: ({ color }) => icon2(color, 'settings'),
+            headerShown: false,
           }}
         />
       </Tab.Navigator>
@@ -94,7 +107,9 @@ function AppNavigation(): React.JSX.Element {
   );
 }
 
-function headerLogo(route: string): React.JSX.Element {
+export function headerLogo(route: string): React.JSX.Element {
+  // console.log(route);
+  
   return (
     <View style={styles.box}>
       <View style={styles.logoBox}>
@@ -106,6 +121,7 @@ function headerLogo(route: string): React.JSX.Element {
           <Text style={[styles.text, {
         marginLeft: 10,
           }]}>{route}</Text>
+          <Text>Newfovnpdgindpis</Text>
       </View>
       </View>
     </View>
@@ -117,6 +133,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     width: '100%',
+    // height: 10,
   },
   logoBox: {
     marginTop: 20,
@@ -126,6 +143,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // justifyContent: 'flex-start',
     width: '100%',
+    marginTop: 20,
   },
   newsBox: {
     width: '100%',
@@ -134,6 +152,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     fontWeight: 'bold',
+    marginLeft: 10,
   }
 });
 
