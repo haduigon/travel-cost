@@ -6,6 +6,11 @@ import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Ionicons2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons3 from 'react-native-vector-icons/Ionicons';
 
+type StackParamList = {
+  Home: undefined;
+  News: {route: string, item: any};
+};
+
 function stackHeader(route: string) {
   return (
     <View style={styles.titleBox}>
@@ -21,7 +26,7 @@ function stackHeaderBack(route: string, onPress?: () => void) {
       style={styles.titleBox}
       onPress={onPress}
     >
-      <Ionicons3 name="chevron-back" size={30} color={'black'} />
+      <Ionicons3 name="chevron-back" size={40} color={'black'} />
       <Ionicons2 name="newspaper-variant-outline" size={50} color={'black'} />
       <Text style={styles.text}>{route}</Text>
     </TouchableOpacity>
@@ -29,7 +34,7 @@ function stackHeaderBack(route: string, onPress?: () => void) {
 }
 
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<StackParamList>();
 
 function NewsNavigation(): React.JSX.Element {
 
