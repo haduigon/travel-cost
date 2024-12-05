@@ -9,37 +9,31 @@ import ProfileNavigation from './ProfileNavigation';
 import SettingsNavigation from './SettingsNavigation';
 import Ionicons from 'react-native-vector-icons/SimpleLineIcons';
 import Ionicons2 from 'react-native-vector-icons/MaterialCommunityIcons';
-import { View, Text, StyleSheet } from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import Logo from '../assets/Logo.svg';
 
-
 export function icon(color: string) {
-    return (
-      <Ionicons2 name="newspaper-variant-outline" size={50} color={color} />
-    );
-  }
-  
-export function icon2(color: string, name: string) {
-    return (
-      <Ionicons name={name} size={40} color={color} />
-    );
+  return <Ionicons2 name="newspaper-variant-outline" size={50} color={color} />;
 }
-  
+
+export function icon2(color: string, name: string) {
+  return <Ionicons name={name} size={40} color={color} />;
+}
 
 const Tab = createBottomTabNavigator();
 
 function AppNavigation(): React.JSX.Element {
-
   return (
-    <NavigationContainer >
+    <NavigationContainer>
       <View
         style={{
           alignItems: 'center',
           justifyContent: 'center',
           // backgroundColor: 'none',
           backgroundColor: '#fff',
-       }}
-      ><Logo width={80} height={80} /></View>
+        }}>
+        <Logo width={80} height={80} />
+      </View>
 
       <Tab.Navigator
         screenOptions={({route}) => ({
@@ -57,7 +51,7 @@ function AppNavigation(): React.JSX.Element {
             height: 60,
             width: 80,
           },
-            headerStyle: {
+          headerStyle: {
             backgroundColor: 'none',
           },
           headerTitleContainerStyle: {
@@ -71,7 +65,7 @@ function AppNavigation(): React.JSX.Element {
           component={NewsNavigation}
           options={{
             tabBarLabel: 'News',
-            tabBarIcon: ({ color }) => (icon(color)),
+            tabBarIcon: ({color}) => icon(color),
             headerShown: false,
           }}
         />
@@ -80,7 +74,7 @@ function AppNavigation(): React.JSX.Element {
           component={TravelsNavigation}
           options={{
             tabBarLabel: 'Travels',
-            tabBarIcon: ({ color }) => icon2(color, 'plane'),
+            tabBarIcon: ({color}) => icon2(color, 'plane'),
             headerShown: false,
           }}
         />
@@ -89,7 +83,7 @@ function AppNavigation(): React.JSX.Element {
           component={ProfileNavigation}
           options={{
             tabBarLabel: 'Profile',
-            tabBarIcon: ({ color }) => icon2(color, 'user'),
+            tabBarIcon: ({color}) => icon2(color, 'user'),
             headerShown: false,
           }}
         />
@@ -98,7 +92,7 @@ function AppNavigation(): React.JSX.Element {
           component={SettingsNavigation}
           options={{
             tabBarLabel: 'Settings',
-            tabBarIcon: ({ color }) => icon2(color, 'settings'),
+            tabBarIcon: ({color}) => icon2(color, 'settings'),
             headerShown: false,
           }}
         />
@@ -109,7 +103,7 @@ function AppNavigation(): React.JSX.Element {
 
 export function headerLogo(route: string): React.JSX.Element {
   // console.log(route);
-  
+
   return (
     <View style={styles.box}>
       <View style={styles.logoBox}>
@@ -117,15 +111,21 @@ export function headerLogo(route: string): React.JSX.Element {
       </View>
       <View style={styles.newsBox}>
         <View style={styles.titleBox}>
-      {icon('black')}
-          <Text style={[styles.text, {
-        marginLeft: 10,
-          }]}>{route}</Text>
+          {icon('black')}
+          <Text
+            style={[
+              styles.text,
+              {
+                marginLeft: 10,
+              },
+            ]}>
+            {route}
+          </Text>
           <Text>Newfovnpdgindpis</Text>
-      </View>
+        </View>
       </View>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -133,7 +133,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     width: '100%',
-    // height: 10,
   },
   logoBox: {
     marginTop: 20,
@@ -141,20 +140,17 @@ const styles = StyleSheet.create({
   titleBox: {
     flexDirection: 'row',
     alignItems: 'center',
-    // justifyContent: 'flex-start',
     width: '100%',
     marginTop: 20,
   },
   newsBox: {
     width: '100%',
-    // marginLeft: 40,
   },
   text: {
     fontSize: 20,
     fontWeight: 'bold',
     marginLeft: 10,
-  }
+  },
 });
-
 
 export default AppNavigation;

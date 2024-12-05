@@ -5,4 +5,7 @@ export type Travel = {
   team: string,
   budget: string,
   description: string,
+  statistics: string,
+  graphics: string,
+  comments: string,
 }

@@ -1,12 +1,8 @@
 import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from '../screens/Settings/HomeScreen';
-import Ionicons2 from 'react-native-vector-icons/MaterialCommunityIcons';
-import Ionicons3 from 'react-native-vector-icons/Ionicons';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import Ionicons from 'react-native-vector-icons/SimpleLineIcons';
-
-
 
 function stackHeader(route: string) {
   return (
@@ -26,7 +22,6 @@ function SettingsNavigation(): React.JSX.Element {
         name="Home"
         component={HomeScreen}
         options={{
-          // headerShown: false,
           header: () => stackHeader('Settings'),
         }}
       />
@@ -48,7 +43,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     padding: 5,
   },
-   box: {
+  box: {
     flex: 1,
     alignItems: 'center',
     width: '100%',
@@ -70,7 +65,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginLeft: 10,
-  }
+  },
 });
 
 export default SettingsNavigation;

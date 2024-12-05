@@ -4,12 +4,14 @@ import Logo from '../../assets/Logo.svg';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 type StackParamList = {
-  News: {route: string; item: any};
+  TravelItem: {route: string; item: any};
 };
 
-type NewsItemProps = NativeStackScreenProps<StackParamList, 'News'>;
-function NewsItem({route}: NewsItemProps): React.JSX.Element {
+type HomeItemProps = NativeStackScreenProps<StackParamList, 'TravelItem'>;
+
+function TravelItem({route}: HomeItemProps): React.JSX.Element {
   const item = route.params.item;
+  // console.log('NewsItemProps', item);
 
   return (
     <View style={styles.box}>
@@ -19,14 +21,14 @@ function NewsItem({route}: NewsItemProps): React.JSX.Element {
         <Logo width={40} height={40} />
       )}
       <View style={styles.textBox}>
-        <Text>{item.title}</Text>
+        <Text>{item.name}</Text>
         <Text>{item.description}</Text>
       </View>
     </View>
   );
 }
 
-export default NewsItem;
+export default TravelItem;
 
 const styles = StyleSheet.create({
   box: {
