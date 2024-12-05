@@ -1,9 +1,11 @@
+/* eslint-disable react-native/no-inline-styles */
 /** eslint-disable */
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, FlatList, Image, TouchableOpacity} from 'react-native';
 import Logo from '../../assets/Logo.svg';
 
 const API_KEY = '74240d0d45984f26a208276b1614598a';
+// const API_KEY = 'A00MlmS04FIdl8aDGFIlImXUrgVZMV0h';
 
 function listItem({item, index, navigation}: {item: any; index: number, navigation: any}) {
   const isLeft = index % 2 === 1;
@@ -40,11 +42,13 @@ export default function HomeScreen({navigation}: any): React.JSX.Element {
       yesterday.setDate(today.getDate() - 1);
       const formattedDate = yesterday.toISOString().split('T')[0];
       const response = await fetch(
+        // `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=${API_KEY}`,
         `https://newsapi.org/v2/everything?q=apple&from=${formattedDate}&to=${formattedDate}&sortBy=popularity&apiKey=${API_KEY}`,
       );
       const json = await response.json();
-      console.log(json, 'json');
-      setNews(json.articles);
+      // console.log(json.articles[0], 'json');
+      const filteredData: any = json.articles.filter((item: any) => item.content !== '[Removed]');
+      setNews(filteredData);
     } catch (error) {
       console.error(error);
     } finally {
@@ -56,7 +60,7 @@ export default function HomeScreen({navigation}: any): React.JSX.Element {
       <FlatList
         data={news}
         renderItem={({item, index}) => listItem({item, index, navigation})}
-        keyExtractor={item => item.title}
+        keyExtractor={item => item.title + item.publishedAt}
       />
     </View>
   );
