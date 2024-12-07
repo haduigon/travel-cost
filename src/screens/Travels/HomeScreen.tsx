@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -7,11 +7,13 @@ import {
   FlatList,
   Text,
   Image,
+  ScrollView,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {AppContext} from '../../context/AppContext';
-// import Logo from '../../assets/Logo.svg';
+
 const defPic = require('../../assets/pic2.png');
+
 
 function listItem({item, navigation}: {item: any; navigation: any}) {
   console.log(item, 'item');
@@ -39,7 +41,7 @@ function listItem({item, navigation}: {item: any; navigation: any}) {
           <Text style={styles.text}>Description: {item.description}</Text>
         </View>
 
-        <View>
+        <ScrollView>
           <Text style={styles.title}>Name: {item.name}</Text>
           <Text style={styles.text}>Place: {item.place}</Text>
           <Text style={styles.text}>Period: {item.time}</Text>
@@ -57,15 +59,25 @@ function listItem({item, navigation}: {item: any; navigation: any}) {
               color: 'white',
             }}>Add participant</Text>
           </TouchableOpacity>
-        </View>
+        </ScrollView>
+
       </View>
     </TouchableOpacity>
   );
 }
 
 export default function HomeScreen({navigation}: any): React.JSX.Element {
-  const {state} = useContext(AppContext);
-  console.log(state, 'state');
+  const { state } = useContext(AppContext);
+  const [search, setSearch] = useState('');
+  const [travels, setTravels] = useState(state.travels);
+
+  useEffect(() => {
+    setTravels(state.travels);
+  }, [state.travels]);
+
+  useEffect(() => {
+    setTravels(state.travels.filter((item: any) => item.name.toLowerCase().includes(search.toLowerCase())));
+  },[search, state.travels]);
 
   return (
     <View style={styles.box}>
@@ -75,7 +87,7 @@ export default function HomeScreen({navigation}: any): React.JSX.Element {
         }}>
         <View style={styles.inputBox}>
           <Ionicons name="search-outline" size={40} color={'black'} />
-          <TextInput style={styles.input} />
+          <TextInput style={styles.input} onChangeText={(text) => setSearch(text)}/>
         </View>
         <View
           style={{
@@ -86,7 +98,7 @@ export default function HomeScreen({navigation}: any): React.JSX.Element {
         </View>
       </View>
       <FlatList
-        data={state.travels}
+        data={travels}
         keyExtractor={item => item.name}
         renderItem={({item}) => listItem({item, navigation})}
       />

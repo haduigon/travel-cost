@@ -9,3 +9,13 @@ export type Travel = {
   graphics: string,
   comments: string,
 }
+
+export type User = {
+  name: string,
+  surname: string,
+  email: string,
+  image: string,
+  about: string,
+  age: string,
+  phone: string,
+}

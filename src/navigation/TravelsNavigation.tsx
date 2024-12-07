@@ -59,8 +59,8 @@ function TravelsNavigation(): React.JSX.Element {
       <Stack.Screen
         name="TravelItem"
         component={TravelItem}
-        options={({navigation}) => ({
-          header: () => stackHeaderBack('TravelItem', () => navigation.goBack()),
+        options={({route, navigation}) => ({
+          header: () => stackHeaderBack(route.params.item.name, () => navigation.goBack()),
         })}
       />
     </Stack.Navigator>

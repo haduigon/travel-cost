@@ -4,13 +4,26 @@ import React, {
   useReducer,
 } from 'react';
 import { ACTIONS } from '../helpers/utils';
-import {Travel} from '../types/types'
+import { Travel } from '../types/types';
+import { User } from '../types/types';
 
-type Action = 
-  | { type: ACTIONS.ADD_TRAVEL; payload: Travel };
+const initialUser: User = {
+  name: 'John Doe',
+  email: '',
+  image: '',
+  about: '',
+  age: '',
+  phone: '',
+  surname: '',
+}
+
+type Action =
+  | { type: ACTIONS.ADD_TRAVEL; payload: Travel }
+  | { type: ACTIONS.UPDATE_USER; payload: User };
 
 interface Data {
   travels: Travel[];
+  user: User;
 }
 
 function reducer(state: Data, action: Action) {
@@ -19,6 +32,11 @@ function reducer(state: Data, action: Action) {
       return {
         ...state,
         travels: [...state.travels, action.payload],
+      };
+    case ACTIONS.UPDATE_USER:
+      return {
+        ...state,
+        user: action.payload,
       };
     default:
       return state;
@@ -31,7 +49,10 @@ interface State {
 }
 
 const initialState: State = {
-  state: {travels: []},
+  state: {
+    travels: [],
+    user: initialUser,
+  },
   dispatch: () => {},
 };
 
