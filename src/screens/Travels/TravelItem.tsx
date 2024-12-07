@@ -1,30 +1,31 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
-import Logo from '../../assets/Logo.svg';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+const defPic = require('../../assets/pic2.png');
+import { Travel } from '../../types/types';
 
 type StackParamList = {
-  TravelItem: {route: string; item: any};
+  TravelItem: {route: string; item: Travel};
 };
 
 type HomeItemProps = NativeStackScreenProps<StackParamList, 'TravelItem'>;
 
 function TravelItem({route}: HomeItemProps): React.JSX.Element {
   const item = route.params.item;
-  // console.log('NewsItemProps', item);
 
   return (
-    <View style={styles.box}>
-      {item.urlToImage ? (
-        <Image source={{uri: item.urlToImage}} style={styles.image} />
-      ) : (
-        <Logo width={40} height={40} />
-      )}
+    <ScrollView style={styles.box}>
+      <Image source={defPic} style={styles.image} />
       <View style={styles.textBox}>
-        <Text>{item.name}</Text>
-        <Text>{item.description}</Text>
+        <Text style={styles.textRow}>Name: {item.name}</Text>
+        <Text style={styles.textRow}>Description: {item.description}</Text>
+        <Text style={styles.textRow}>Statistics: {item.description}</Text>
+        <Text style={styles.textRow}>Budget: {item.budget}</Text>
+        <Text style={styles.textRow}>Place: {item.place}</Text>
+        <Text style={styles.textRow}>Date: {item.date}</Text>
+        <Text style={styles.textRow}>Comments: {item.comments}</Text>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -33,7 +34,6 @@ export default TravelItem;
 const styles = StyleSheet.create({
   box: {
     flex: 1,
-    alignItems: 'center',
     marginTop: 20,
     marginLeft: 20,
     marginRight: 20,
@@ -47,4 +47,7 @@ const styles = StyleSheet.create({
   textBox: {
     marginTop: 10,
   },
+  textRow: {
+    marginTop: 20,
+  }
 });
