@@ -3,16 +3,11 @@ import {
   View,
   Text,
   StyleSheet,
-  // Image,
   KeyboardAvoidingView,
   Platform,
   Switch,
-  TouchableWithoutFeedback,
-  Keyboard,
 } from 'react-native';
-// import {User} from '../../types/types';
 import {AppContext} from '../../context/AppContext';
-// const defaultface = require('../../assets/ex1.jpg');
 import ProfileInput from '../../components/ProfileInput';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import FlyButton from '../../components/FlyButton';
@@ -23,8 +18,8 @@ import DropDownPicker from 'react-native-dropdown-picker';
 export default function HomeScreen(): React.JSX.Element {
   const {state, dispatch} = useContext(AppContext);
   const [settings, setSettings] = React.useState<Settings>(state.settings);
+  const [isEnabled, setIsEnabled] = useState(false);
 
-  // const [selectedLanguage, setSelectedLanguage] = React.useState('');
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([
@@ -103,7 +98,7 @@ export default function HomeScreen(): React.JSX.Element {
                 placeholder="USD"
                 style={{
                   borderColor: 'lightgrey',
-                  marginLeft: '12%',
+                  marginLeft: '11%',
                 }}
               />
             </View>
@@ -140,19 +135,46 @@ export default function HomeScreen(): React.JSX.Element {
                 placeholder="English"
                 style={{
                   borderColor: 'lightgrey',
-                  marginLeft: '12%',
+                  marginLeft: '11%',
                 }}
               />
             </View>
           </View>
 
-          <View style={styles.row}>
-            <ProfileInput
-              title="Notifications: "
-              // onChangeText={text => updateSettings('email', text)}
-              // value={user.email}
-            />
+          <View
+            style={[
+              styles.row,
+              {
+                alignItems: 'center',
+                width: '100%',
+                marginLeft: '8%',
+                zIndex: open2 ? 1000 : 0,
+              },
+            ]}>
+            <Text
+              style={{
+                width: 75,
+              }}>
+              Notifications:
+            </Text>
+
+            <View
+              style={{
+                width: '65%',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Switch
+                trackColor={{false: '#767577', true: '#81b0ff'}}
+                thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+                ios_backgroundColor="#3e3e3e"
+                onValueChange={() => setIsEnabled(prev => !prev)}
+                value={isEnabled}
+                style={{transform: [{scaleX: 1}, {scaleY: 1}]}}
+              />
+            </View>
           </View>
+
           <View style={styles.row}>
             <ProfileInput
               title="Blacklist: "
