@@ -8,7 +8,7 @@ import Ionicons3 from 'react-native-vector-icons/Ionicons';
 
 type StackParamList = {
   Home: undefined;
-  News: {route: string, item: any};
+  News2: {route: string; item: any};
 };
 
 function stackHeader(route: string) {
@@ -22,10 +22,7 @@ function stackHeader(route: string) {
 
 function stackHeaderBack(route: string, onPress?: () => void) {
   return (
-    <TouchableOpacity
-      style={styles.titleBox}
-      onPress={onPress}
-    >
+    <TouchableOpacity style={styles.titleBox} onPress={onPress}>
       <Ionicons3 name="chevron-back" size={40} color={'black'} />
       <Ionicons2 name="newspaper-variant-outline" size={50} color={'black'} />
       <Text style={styles.text}>{route}</Text>
@@ -33,11 +30,9 @@ function stackHeaderBack(route: string, onPress?: () => void) {
   );
 }
 
-
 const Stack = createNativeStackNavigator<StackParamList>();
 
 function NewsNavigation(): React.JSX.Element {
-
   return (
     <Stack.Navigator
       screenOptions={{
@@ -53,14 +48,14 @@ function NewsNavigation(): React.JSX.Element {
       <Stack.Screen
         name="Home"
         component={HomeScreen}
-        options={({  }) => ({
+        options={({}) => ({
           header: () => stackHeader('News'),
         })}
       />
       <Stack.Screen
-        name="News"
+        name="News2"
         component={NewsItem}
-        options={({ navigation }) => ({
+        options={({navigation}) => ({
           header: () => stackHeaderBack('News', () => navigation.goBack()),
         })}
       />
@@ -82,7 +77,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     padding: 5,
   },
-   box: {
+  box: {
     flex: 1,
     alignItems: 'center',
     width: '100%',
@@ -104,7 +99,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginLeft: 10,
-  }
+  },
 });
 
 export default NewsNavigation;

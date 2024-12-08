@@ -1,29 +1,40 @@
-/* eslint-disable react-native/no-inline-styles */
-/** eslint-disable */
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, FlatList, Image, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import Logo from '../../assets/Logo.svg';
 
 const API_KEY = '74240d0d45984f26a208276b1614598a';
-// const API_KEY = 'A00MlmS04FIdl8aDGFIlImXUrgVZMV0h';
 
-function listItem({item, index, navigation}: {item: any; index: number, navigation: any}) {
+function listItem({
+  item,
+  index,
+  navigation,
+}: {
+  item: any;
+  index: number;
+  navigation: any;
+}) {
   const isLeft = index % 2 === 1;
   return (
     <TouchableOpacity
-    onPress={() => {
-      navigation.navigate('News', {item: item});
-    }}
-    >
-    <View style={[styles.newsBox, isLeft && {flexDirection: 'row-reverse'}]}>
-      <Text style={styles.text}>{item.description}</Text>
-      {item.urlToImage ? (
-        <Image source={{uri: item.urlToImage}} style={styles.image} />
-      ) : (
-        <Logo width={40} height={40} />
-      )}
+      onPress={() => {
+        navigation.navigate('News2', {item: item});
+      }}>
+      <View style={[styles.newsBox, isLeft && {flexDirection: 'row-reverse'}]}>
+        <Text style={styles.text}>{item.description}</Text>
+        {item.urlToImage ? (
+          <Image source={{uri: item.urlToImage}} style={styles.image} />
+        ) : (
+          <Logo width={40} height={40} />
+        )}
       </View>
-      </TouchableOpacity>
+    </TouchableOpacity>
   );
 }
 
@@ -42,12 +53,13 @@ export default function HomeScreen({navigation}: any): React.JSX.Element {
       yesterday.setDate(today.getDate() - 1);
       const formattedDate = yesterday.toISOString().split('T')[0];
       const response = await fetch(
-        // `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=${API_KEY}`,
         `https://newsapi.org/v2/everything?q=apple&from=${formattedDate}&to=${formattedDate}&sortBy=popularity&apiKey=${API_KEY}`,
       );
       const json = await response.json();
-      // console.log(json.articles[0], 'json');
-      const filteredData: any = json.articles.filter((item: any) => item.content !== '[Removed]');
+
+      const filteredData: any = json.articles.filter(
+        (item: any) => item.content !== '[Removed]',
+      );
       setNews(filteredData);
     } catch (error) {
       console.error(error);

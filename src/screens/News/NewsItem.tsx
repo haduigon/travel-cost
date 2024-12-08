@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import Logo from '../../assets/Logo.svg';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 type StackParamList = {
-  News: {route: string; item: any};
+  News2: {route: string; item: any};
 };
 
-type NewsItemProps = NativeStackScreenProps<StackParamList, 'News'>;
+type NewsItemProps = NativeStackScreenProps<StackParamList, 'News2'>;
 function NewsItem({route}: NewsItemProps): React.JSX.Element {
   const item = route.params.item;
 
@@ -19,10 +19,11 @@ function NewsItem({route}: NewsItemProps): React.JSX.Element {
         <Logo width={40} height={40} />
       )}
       <View style={styles.textBox}>
-        <Text>{item.title}</Text>
-        <Text>{item.description}</Text>
+        <Text style={styles.title}>{item.title}</Text>
+        <Text style={{
+          fontSize: 18,
+        }}>{item.description}</Text>
       </View>
-
     </View>
   );
 }
@@ -40,11 +41,16 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 100,
+    height: 300,
     marginLeft: 5,
     marginRight: 5,
   },
   textBox: {
     marginTop: 10,
   },
+  title: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  }
 });

@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     width: '65%',
     marginRight: 10,
+    // marginBottom: 20,
   },
   inputBigBox: {
     width: '100%',

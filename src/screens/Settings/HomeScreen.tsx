@@ -63,12 +63,7 @@ export default function HomeScreen(): React.JSX.Element {
           Common settings
         </Text>
 
-        <KeyboardAwareScrollView
-          contentContainerStyle={styles.scrollContent}
-          extraScrollHeight={-100}
-          enableOnAndroid
-          keyboardShouldPersistTaps="handled">
-          <View
+             <View
             style={[
               styles.row,
               {
@@ -100,6 +95,10 @@ export default function HomeScreen(): React.JSX.Element {
                   borderColor: 'lightgrey',
                   marginLeft: '11%',
                 }}
+                dropDownContainerStyle={{
+                  zIndex: 1000,
+                  position: 'absolute',
+                }}
               />
             </View>
           </View>
@@ -123,7 +122,8 @@ export default function HomeScreen(): React.JSX.Element {
 
             <View
               style={{
-                width: '65%',
+              width: '65%',
+              marginBottom: 10,
               }}>
               <DropDownPicker
                 open={open2}
@@ -137,9 +137,21 @@ export default function HomeScreen(): React.JSX.Element {
                   borderColor: 'lightgrey',
                   marginLeft: '11%',
                 }}
+                dropDownContainerStyle={{
+                  zIndex: 1000,
+                  position: 'absolute',
+                  // marginBottom: 20,
+                }}
               />
             </View>
           </View>
+
+        <KeyboardAwareScrollView
+          contentContainerStyle={styles.scrollContent}
+          extraScrollHeight={-100}
+          enableOnAndroid
+          keyboardShouldPersistTaps="handled"
+          nestedScrollEnabled={true}>
 
           <View
             style={[
@@ -148,12 +160,12 @@ export default function HomeScreen(): React.JSX.Element {
                 alignItems: 'center',
                 width: '100%',
                 marginLeft: '8%',
-                zIndex: open2 ? 1000 : 0,
+                zIndex: open2 ? 0 : 0,
               },
             ]}>
             <Text
               style={{
-                width: 75,
+                width: 90,
               }}>
               Notifications:
             </Text>
@@ -170,7 +182,9 @@ export default function HomeScreen(): React.JSX.Element {
                 ios_backgroundColor="#3e3e3e"
                 onValueChange={() => setIsEnabled(prev => !prev)}
                 value={isEnabled}
-                style={{transform: [{scaleX: 1}, {scaleY: 1}]}}
+                style={{
+                  transform: [{ scaleX: 1 }, { scaleY: 1 }],
+                }}
               />
             </View>
           </View>
@@ -266,3 +280,307 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, {useContext, useState} from 'react';
+// import {
+//   View,
+//   Text,
+//   StyleSheet,
+//   KeyboardAvoidingView,
+//   Platform,
+//   Switch,
+//   FlatList,
+// } from 'react-native';
+// import {AppContext} from '../../context/AppContext';
+// import ProfileInput from '../../components/ProfileInput';
+// import FlyButton from '../../components/FlyButton';
+// import {ACTIONS} from '../../helpers/utils';
+// import {Settings} from '../../types/types';
+// import DropDownPicker from 'react-native-dropdown-picker';
+
+// export default function HomeScreen(): React.JSX.Element {
+//   const {state, dispatch} = useContext(AppContext);
+//   const [settings, setSettings] = React.useState<Settings>(state.settings);
+//   const [isEnabled, setIsEnabled] = useState(false);
+
+//   const [open, setOpen] = useState(false);
+//   const [value, setValue] = useState(null);
+//   const [items, setItems] = useState([
+//     {label: 'USD', value: 'usd'},
+//     {label: 'EUR', value: 'eur'},
+//     {label: 'UAH', value: 'uah'},
+//     {label: 'Pounds', value: 'gbp'},
+//   ]);
+
+//   const [open2, setOpen2] = useState(false);
+//   const [value2, setValue2] = useState(null);
+//   const [items2, setItems2] = useState([
+//     {label: 'English', value: 'en'},
+//     {label: 'Español', value: 'es'},
+//     {label: 'French', value: 'fr'},
+//     {label: 'Deutsch', value: 'de'},
+//   ]);
+
+//   function updateSettings(name: string, data: any) {
+//     setSettings(prevUser => ({
+//       ...prevUser,
+//       [name]: data,
+//     }));
+//   }
+
+//   const data = [
+//     {
+//       key: 'currency',
+//       component: (
+//         <View style={[styles.row, { zIndex: open ? 1000 : 1, marginLeft: '4%' }]}>
+//           <Text style={[styles.label, {
+//             marginRight: '8%',
+//           }]}>Currency:</Text>
+//           <View style={styles.dropdownContainer}>
+//             <DropDownPicker
+//               open={open}
+//               value={value}
+//               items={items}
+//               setOpen={setOpen}
+//               setValue={setValue}
+//               setItems={setItems}
+//               placeholder="USD"
+//               style={styles.dropdown}
+//               dropDownContainerStyle={styles.dropDownContainer}
+//             />
+//           </View>
+//         </View>
+//       )
+//     },
+//     {
+//       key: 'language',
+//       component: (
+//         <View style={[styles.row, { zIndex: open2 ? 1000 : 1, marginLeft: '4%'  }]}>
+//           <Text style={[styles.label, {
+//             marginRight: '8%',
+//           }]}>Language:</Text>
+//           <View style={styles.dropdownContainer}>
+//             <DropDownPicker
+//               open={open2}
+//               value={value2}
+//               items={items2}
+//               setOpen={setOpen2}
+//               setValue={setValue2}
+//               setItems={setItems2}
+//               placeholder="English"
+//               style={styles.dropdown}
+//               dropDownContainerStyle={styles.dropDownContainer}
+//             />
+//           </View>
+//         </View>
+//       )
+//     },
+//     {
+//       key: 'notifications',
+//       component: (
+//         <View style={[styles.row, {marginLeft: '4%', marginBottom: 20,}]}>
+//           <Text style={[styles.label, {
+//             marginRight: '4%',
+//             width: 100,
+//           }]}>Notifications:</Text>
+//           <View style={styles.switchContainer}>
+//             <Switch
+//               trackColor={{false: '#767577', true: '#81b0ff'}}
+//               thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+//               onValueChange={() => setIsEnabled(prev => !prev)}
+//               value={isEnabled}
+//             />
+//           </View>
+//         </View>
+//       )
+//     },
+//     {
+//       key: 'blacklist',
+//       component: (
+//         <ProfileInput
+//           title="Blacklist: "
+//           onChangeText={text => updateSettings('blacklist', text)}
+//           value={settings?.blacklist.join(', ')}
+//         />
+//       )
+//     },
+//     {
+//       key: 'about',
+//       component: (
+//         <ProfileInput
+//           title="About: "
+//           onChangeText={text => updateSettings('about', text)}
+//           value={settings?.about}
+//         />
+//       )
+//     },
+//     {
+//       key: 'oldPassword',
+//       component: (
+//         <ProfileInput
+//           title="Old password: "
+//           onChangeText={text => updateSettings('oldPassword', text)}
+//           value={settings?.about} 
+//         />
+//       )
+//     },
+//     {
+//       key: 'newPassword',
+//       component: (
+//         <ProfileInput
+//           title="New Password: "
+//           onChangeText={text => updateSettings('newPassword', text)}
+//           value={settings?.about}
+//         />
+//       )
+//     },
+//   ];
+
+//   const renderItem = ({ item }) => item.component;
+
+//   return (
+//     <KeyboardAvoidingView 
+//       behavior={Platform.OS === 'ios' ? 'padding' : 'height'} 
+//       style={{
+//         flex: 1
+//       }}
+//     >
+//     <FlatList
+//       data={data}
+//         keyExtractor={(item) => item.key}
+//         contentContainerStyle={{ paddingBottom: 50, }}
+//         keyboardShouldPersistTaps="handled"
+//       renderItem={renderItem}
+//       ListFooterComponent={
+//         <>
+//           <FlyButton
+//             title="Save"
+//             onPress={() =>
+//               dispatch({type: ACTIONS.UPDATE_SETTINGS, payload: settings})
+//             }
+//             style={styles.saveButton}
+//           />
+//           <FlyButton
+//             title="Cancel"
+//             onPress={() => console.log('Save')}
+//             style={styles.cancelButton}
+//           />
+//         </>
+//       }
+//       />
+//       </KeyboardAvoidingView>
+//   );
+// }
+
+// const styles = StyleSheet.create({
+//   box: {
+//     flex: 1,
+//     alignItems: 'center',
+//   },
+//   row: {
+//     flexDirection: 'row',
+//     marginTop: 20,
+//   },
+//   label: {
+//     width: 75,
+//   },
+//   dropdownContainer: {
+//     width: '67%',
+//     zIndex: 1000,
+//   },
+//   dropdown: {
+//     borderColor: 'lightgrey',
+//   },
+//   dropDownContainer: {
+//     zIndex: 1000,
+//     position: 'absolute',
+//   },
+//   switchContainer: {
+//     width: '65%',
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+//   saveButton: {
+//     bottom: -30,
+//     right: 40,
+//   },
+//   cancelButton: {
+//     bottom: -30,
+//     right: 220,
+//   },
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
