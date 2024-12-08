@@ -19,3 +19,13 @@ export type User = {
   age: string,
   phone: string,
 }
+
+export type Settings = {
+  currency: string,
+  lang: string,
+  notifications: boolean,
+  blacklist: string[],
+  about: string,
+  oldPassword: string,
+  newPassword: string,
+}

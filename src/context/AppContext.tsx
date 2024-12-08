@@ -5,7 +5,7 @@ import React, {
 } from 'react';
 import { ACTIONS } from '../helpers/utils';
 import { Travel } from '../types/types';
-import { User } from '../types/types';
+import { User, Settings } from '../types/types';
 
 const initialUser: User = {
   name: 'John Doe',
@@ -17,13 +17,25 @@ const initialUser: User = {
   surname: '',
 }
 
+const initialSettings: Settings = {
+  currency: 'USD',
+  lang: 'en',
+  notifications: true,
+  blacklist: [],
+  about: '',
+  oldPassword: '',
+  newPassword: '',
+}
+
 type Action =
   | { type: ACTIONS.ADD_TRAVEL; payload: Travel }
-  | { type: ACTIONS.UPDATE_USER; payload: User };
+  | { type: ACTIONS.UPDATE_USER; payload: User }
+  | { type: ACTIONS.UPDATE_SETTINGS; payload: Settings };
 
 interface Data {
   travels: Travel[];
   user: User;
+  settings: Settings;
 }
 
 function reducer(state: Data, action: Action) {
@@ -37,6 +49,11 @@ function reducer(state: Data, action: Action) {
       return {
         ...state,
         user: action.payload,
+      };
+    case ACTIONS.UPDATE_SETTINGS:
+      return {
+        ...state,
+        settings: action.payload,
       };
     default:
       return state;
@@ -52,6 +69,7 @@ const initialState: State = {
   state: {
     travels: [],
     user: initialUser,
+    settings: initialSettings,
   },
   dispatch: () => {},
 };
