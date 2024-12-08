@@ -6,6 +6,7 @@ import {
   Image,
   KeyboardAvoidingView,
   Platform,
+  Alert,
 } from 'react-native';
 import {User} from '../../types/types';
 import {AppContext} from '../../context/AppContext';
@@ -21,10 +22,23 @@ export default function HomeScreen(): React.JSX.Element {
   const imageSource = user?.image ? {uri: user.image} : defaultface;
 
   function updateUser(name: string, data: any) {
+
     setUser(prevUser => ({
       ...prevUser,
       [name]: data,
     }));
+  }
+
+  function saveUser() {
+    const properties = Object.values(user);
+    const isEmpty = properties.filter(value => value.length < 3).length > 1;
+    
+    if (isEmpty) {
+      Alert.alert('Error', 'Please fill in all fields');
+      return;
+    }
+    dispatch({ type: ACTIONS.UPDATE_USER, payload: user });
+    Alert.alert('Success', 'We saved your settings');
   }
 
   return (
@@ -105,7 +119,7 @@ export default function HomeScreen(): React.JSX.Element {
 
       <FlyButton
         title="Save"
-        onPress={() => dispatch({type: ACTIONS.UPDATE_USER, payload: user})}
+        onPress={saveUser}
         style={{
           bottom: 20,
           right: 40,

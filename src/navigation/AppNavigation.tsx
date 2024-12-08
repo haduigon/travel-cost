@@ -29,7 +29,6 @@ function AppNavigation(): React.JSX.Element {
         style={{
           alignItems: 'center',
           justifyContent: 'center',
-          // backgroundColor: 'none',
           backgroundColor: '#fff',
         }}>
         <Logo width={80} height={80} />
