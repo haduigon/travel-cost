@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import Logo from '../../assets/Logo.svg';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 type StackParamList = {
   News: {route: string; item: any};
@@ -22,6 +22,7 @@ function NewsItem({route}: NewsItemProps): React.JSX.Element {
         <Text>{item.title}</Text>
         <Text>{item.description}</Text>
       </View>
+
     </View>
   );
 }
@@ -31,6 +32,7 @@ export default NewsItem;
 const styles = StyleSheet.create({
   box: {
     flex: 1,
+    flexGrow: 1,
     alignItems: 'center',
     marginTop: 20,
     marginLeft: 20,
