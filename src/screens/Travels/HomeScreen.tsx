@@ -26,8 +26,14 @@ function listItem({item, navigation}: {item: any; navigation: any}) {
       <View style={styles.itemBox}>
         <View style={styles.leftSide}>
           <View>
-            {item.urlToImage ? (
-              <Image source={{uri: item.urlToImage}} />
+            {item.image ? (
+              <Image
+                source={{ uri: item.image }}
+                style={{
+                  width: 100,
+                  height: 100,
+                }}
+              />
             ) : (
               <Image
                 source={defPic}

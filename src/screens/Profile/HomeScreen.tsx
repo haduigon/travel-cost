@@ -19,7 +19,8 @@ import { ACTIONS } from '../../helpers/utils';
 export default function HomeScreen(): React.JSX.Element {
   const {state, dispatch} = useContext(AppContext);
   const [user, setUser] = React.useState<User>(state.user);
-  const imageSource = user?.image ? {uri: user.image} : defaultface;
+  const imageSource = user?.image ? { uri: user.image } : defaultface;
+  // const [error, setError] = React.useState<string | undefined>();
 
   function updateUser(name: string, data: any) {
 
@@ -28,11 +29,18 @@ export default function HomeScreen(): React.JSX.Element {
       [name]: data,
     }));
   }
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   function saveUser() {
+
+    if (!emailPattern.test(user.email)) {
+      // setError('Please enter a valid email address');
+      Alert.alert('Please enter a valid email address');
+      return;
+    }
+
     const properties = Object.values(user);
-    const isEmpty = properties.filter(value => value.length < 3).length > 1;
-    
+    const isEmpty = properties.filter(value => value.length < 2).length > 1;
     if (isEmpty) {
       Alert.alert('Error', 'Please fill in all fields');
       return;

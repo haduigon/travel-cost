@@ -7,13 +7,16 @@ import {
   Text,
   KeyboardAvoidingView,
   Platform,
+  Image,
 } from 'react-native';
 import NewTravelInput from '../../components/NewTravelInput';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import FlyButton from '../../components/FlyButton';
 import {ACTIONS} from '../../helpers/utils';
 import {Travel} from '../../types/types';
-import {AppContext} from '../../context/AppContext';
+import { AppContext } from '../../context/AppContext';
+import { launchImageLibrary } from 'react-native-image-picker';
+// import RNFS from 'react-native-fs';
 
 export default function NewTravel({navigation}: any): React.JSX.Element {
   const {dispatch} = useContext(AppContext);
@@ -28,6 +31,7 @@ export default function NewTravel({navigation}: any): React.JSX.Element {
     statistics: '',
     graphics: '',
     comments: '',
+    image: '',
   };
 
   const [newTravel, setNewTravel] = useState<Travel>(initialTravel);
@@ -50,6 +54,23 @@ export default function NewTravel({navigation}: any): React.JSX.Element {
     });
   }
 
+    const pickImageFromGallery = async () => {
+
+    try {
+      const result = await launchImageLibrary({
+        mediaType: 'photo',
+        quality: 1,
+      });
+
+      if (!result.didCancel && result.assets && result.assets[0].uri) {
+        const uri = result.assets[0].uri;
+       handleChangeTravel(uri, 'image');
+      }
+    } catch (error) {
+      console.error('Error picking image:', error);
+    }
+  };
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -60,7 +81,19 @@ export default function NewTravel({navigation}: any): React.JSX.Element {
         contentContainerStyle={styles.scrollContent}
         extraScrollHeight={-100}
         enableOnAndroid>
-        <View style={styles.topBlock}>
+        {newTravel.image.length > 0 ? (
+          <View>
+          <Image
+            source={{uri: newTravel.image}}
+            style={{
+              width: 400,
+              height: 150,
+              borderTopLeftRadius: 20,
+              borderTopRightRadius: 20,
+            }} />
+          </View>
+        ): (
+            <View style={styles.topBlock}>
           <Text
             style={{
               color: 'white',
@@ -71,8 +104,10 @@ export default function NewTravel({navigation}: any): React.JSX.Element {
             Add image
           </Text>
         </View>
+        )
+        }
         <View style={styles.container}>
-          <TouchableOpacity style={styles.addImgButton}>
+          <TouchableOpacity style={styles.addImgButton} onPress={pickImageFromGallery}>
             <Text style={styles.text}>Download image</Text>
           </TouchableOpacity>
 
@@ -182,7 +217,7 @@ const styles = StyleSheet.create({
   },
   topBlock: {
     height: 150,
-    width: '90%',
+    width: 400,
     backgroundColor: 'black',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
