@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, Text, TextInput, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, TextInput, StyleSheet, Alert} from 'react-native';
 import {StyleProp, ViewStyle} from 'react-native';
 
 type Props = {
@@ -15,6 +15,19 @@ export default function ProfileInput({
   value,
   onChangeText,
 }: Props): React.JSX.Element {
+
+
+
+
+
+  const handleChangeText = (text: string) => {
+    const validatedText = validateInput(text);
+    if (onChangeText) {
+      onChangeText(validatedText);
+    }
+  };
+
+
   return (
     <View style={[styles.inputBigBox, style]}>
       <Text
@@ -29,6 +42,8 @@ export default function ProfileInput({
           style={styles.input}
           onChangeText={onChangeText}
           value={value || ''}
+          keyboardType={title.toLowerCase().includes('phone') ? 'phone-pad' : 'default'}
+          maxLength={title.toLowerCase().includes('phone') ? 12 : 100}
         />
       </View>
     </View>

@@ -8,6 +8,7 @@ export type Travel = {
   statistics: string,
   graphics: string,
   comments: string,
+  image: string,
 }
 
 export type User = {
