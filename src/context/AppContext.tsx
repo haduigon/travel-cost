@@ -1,11 +1,7 @@
-import React, {
-  createContext,
-  Dispatch,
-  useReducer,
-} from 'react';
-import { ACTIONS } from '../helpers/utils';
-import { Travel } from '../types/types';
-import { User, Settings } from '../types/types';
+import React, {createContext, Dispatch, useReducer} from 'react';
+import {ACTIONS} from '../helpers/utils';
+import {Travel} from '../types/types';
+import {User, Settings} from '../types/types';
 
 const initialUser: User = {
   name: 'John Doe',
@@ -15,7 +11,7 @@ const initialUser: User = {
   age: '',
   phone: '',
   surname: '',
-}
+};
 
 const initialSettings: Settings = {
   currency: 'USD',
@@ -25,12 +21,12 @@ const initialSettings: Settings = {
   about: '',
   oldPassword: '',
   newPassword: '',
-}
+};
 
 type Action =
-  | { type: ACTIONS.ADD_TRAVEL; payload: Travel }
-  | { type: ACTIONS.UPDATE_USER; payload: User }
-  | { type: ACTIONS.UPDATE_SETTINGS; payload: Settings };
+  | {type: ACTIONS.ADD_TRAVEL; payload: Travel}
+  | {type: ACTIONS.UPDATE_USER; payload: User}
+  | {type: ACTIONS.UPDATE_SETTINGS; payload: Settings};
 
 interface Data {
   travels: Travel[];
@@ -61,8 +57,8 @@ function reducer(state: Data, action: Action) {
 }
 
 interface State {
-  state: Data,
-  dispatch: Dispatch<Action>,
+  state: Data;
+  dispatch: Dispatch<Action>;
 }
 
 const initialState: State = {
@@ -80,12 +76,12 @@ interface Props {
   children: React.ReactNode;
 }
 
-export const AppProvider: React.FC<Props> = ({ children }) => {
+export const AppProvider: React.FC<Props> = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialState.state);
 
   return (
-    <AppContext.Provider value={{ state, dispatch }}>
+    <AppContext.Provider value={{state, dispatch}}>
       {children}
     </AppContext.Provider>
   );
-}
+};

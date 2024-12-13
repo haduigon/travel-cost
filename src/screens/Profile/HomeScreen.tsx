@@ -14,27 +14,23 @@ const defaultface = require('../../assets/ex1.jpg');
 import ProfileInput from '../../components/ProfileInput';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import FlyButton from '../../components/FlyButton';
-import { ACTIONS } from '../../helpers/utils';
+import {ACTIONS} from '../../helpers/utils';
 
 export default function HomeScreen(): React.JSX.Element {
   const {state, dispatch} = useContext(AppContext);
   const [user, setUser] = React.useState<User>(state.user);
-  const imageSource = user?.image ? { uri: user.image } : defaultface;
-  // const [error, setError] = React.useState<string | undefined>();
+  const imageSource = user?.image ? {uri: user.image} : defaultface;
 
   function updateUser(name: string, data: any) {
-
     setUser(prevUser => ({
       ...prevUser,
       [name]: data,
     }));
   }
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   function saveUser() {
-
     if (!emailPattern.test(user.email)) {
-      // setError('Please enter a valid email address');
       Alert.alert('Please enter a valid email address');
       return;
     }
@@ -45,7 +41,7 @@ export default function HomeScreen(): React.JSX.Element {
       Alert.alert('Error', 'Please fill in all fields');
       return;
     }
-    dispatch({ type: ACTIONS.UPDATE_USER, payload: user });
+    dispatch({type: ACTIONS.UPDATE_USER, payload: user});
     Alert.alert('Success', 'We saved your settings');
   }
 
