@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, {useContext, useState} from 'react';
 import {
   View,
@@ -14,9 +13,8 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import FlyButton from '../../components/FlyButton';
 import {ACTIONS} from '../../helpers/utils';
 import {Travel} from '../../types/types';
-import { AppContext } from '../../context/AppContext';
-import { launchImageLibrary } from 'react-native-image-picker';
-// import RNFS from 'react-native-fs';
+import {AppContext} from '../../context/AppContext';
+import {launchImageLibrary} from 'react-native-image-picker';
 
 export default function NewTravel({navigation}: any): React.JSX.Element {
   const {dispatch} = useContext(AppContext);
@@ -54,8 +52,7 @@ export default function NewTravel({navigation}: any): React.JSX.Element {
     });
   }
 
-    const pickImageFromGallery = async () => {
-
+  const pickImageFromGallery = async () => {
     try {
       const result = await launchImageLibrary({
         mediaType: 'photo',
@@ -64,7 +61,7 @@ export default function NewTravel({navigation}: any): React.JSX.Element {
 
       if (!result.didCancel && result.assets && result.assets[0].uri) {
         const uri = result.assets[0].uri;
-       handleChangeTravel(uri, 'image');
+        handleChangeTravel(uri, 'image');
       }
     } catch (error) {
       console.error('Error picking image:', error);
@@ -83,31 +80,33 @@ export default function NewTravel({navigation}: any): React.JSX.Element {
         enableOnAndroid>
         {newTravel.image.length > 0 ? (
           <View>
-          <Image
-            source={{uri: newTravel.image}}
-            style={{
-              width: 400,
-              height: 150,
-              borderTopLeftRadius: 20,
-              borderTopRightRadius: 20,
-            }} />
+            <Image
+              source={{uri: newTravel.image}}
+              style={{
+                width: 400,
+                height: 150,
+                borderTopLeftRadius: 20,
+                borderTopRightRadius: 20,
+              }}
+            />
           </View>
-        ): (
-            <View style={styles.topBlock}>
-          <Text
-            style={{
-              color: 'white',
-              fontSize: 20,
-              textAlign: 'center',
-              marginTop: 30,
-            }}>
-            Add image
-          </Text>
-        </View>
-        )
-        }
+        ) : (
+          <View style={styles.topBlock}>
+            <Text
+              style={{
+                color: 'white',
+                fontSize: 20,
+                textAlign: 'center',
+                marginTop: 30,
+              }}>
+              Add image
+            </Text>
+          </View>
+        )}
         <View style={styles.container}>
-          <TouchableOpacity style={styles.addImgButton} onPress={pickImageFromGallery}>
+          <TouchableOpacity
+            style={styles.addImgButton}
+            onPress={pickImageFromGallery}>
             <Text style={styles.text}>Download image</Text>
           </TouchableOpacity>
 

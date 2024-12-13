@@ -63,88 +63,88 @@ export default function HomeScreen(): React.JSX.Element {
           Common settings
         </Text>
 
-             <View
-            style={[
-              styles.row,
-              {
-                alignItems: 'center',
-                width: '100%',
-                marginLeft: '8%',
-              },
-            ]}>
-            <Text
-              style={{
-                width: 75,
-              }}>
-              Currency:{' '}
-            </Text>
-
-            <View
-              style={{
-                width: '65%',
-              }}>
-              <DropDownPicker
-                open={open}
-                value={value}
-                items={items}
-                setOpen={setOpen}
-                setValue={setValue}
-                setItems={setItems}
-                placeholder="USD"
-                style={{
-                  borderColor: 'lightgrey',
-                  marginLeft: '11%',
-                }}
-                dropDownContainerStyle={{
-                  zIndex: 1000,
-                  position: 'absolute',
-                }}
-              />
-            </View>
-          </View>
+        <View
+          style={[
+            styles.row,
+            {
+              alignItems: 'center',
+              width: '100%',
+              marginLeft: '8%',
+            },
+          ]}>
+          <Text
+            style={{
+              width: 75,
+            }}>
+            Currency:{' '}
+          </Text>
 
           <View
-            style={[
-              styles.row,
-              {
-                alignItems: 'center',
-                width: '100%',
-                marginLeft: '8%',
-                zIndex: open2 ? 1000 : 0,
-              },
-            ]}>
-            <Text
+            style={{
+              width: '65%',
+            }}>
+            <DropDownPicker
+              open={open}
+              value={value}
+              items={items}
+              setOpen={setOpen}
+              setValue={setValue}
+              setItems={setItems}
+              placeholder="USD"
               style={{
-                width: 75,
-              }}>
-              Language:{' '}
-            </Text>
+                borderColor: 'lightgrey',
+                marginLeft: '11%',
+              }}
+              dropDownContainerStyle={{
+                zIndex: 1000,
+                position: 'absolute',
+              }}
+            />
+          </View>
+        </View>
 
-            <View
-              style={{
+        <View
+          style={[
+            styles.row,
+            {
+              alignItems: 'center',
+              width: '100%',
+              marginLeft: '8%',
+              zIndex: open2 ? 1000 : 0,
+            },
+          ]}>
+          <Text
+            style={{
+              width: 75,
+            }}>
+            Language:{' '}
+          </Text>
+
+          <View
+            style={{
               width: '65%',
               marginBottom: 10,
-              }}>
-              <DropDownPicker
-                open={open2}
-                value={value2}
-                items={items2}
-                setOpen={setOpen2}
-                setValue={setValue2}
-                setItems={setItems2}
-                placeholder="English"
-                style={{
-                  borderColor: 'lightgrey',
-                  marginLeft: '11%',
-                }}
-                dropDownContainerStyle={{
-                  zIndex: 1000,
-                  position: 'absolute',
-                  // marginBottom: 20,
-                }}
-              />
-            </View>
+            }}>
+            <DropDownPicker
+              open={open2}
+              value={value2}
+              items={items2}
+              setOpen={setOpen2}
+              setValue={setValue2}
+              setItems={setItems2}
+              placeholder="English"
+              style={{
+                borderColor: 'lightgrey',
+                marginLeft: '11%',
+              }}
+              dropDownContainerStyle={{
+                zIndex: 1000,
+                position: 'absolute',
+                // marginBottom: 20,
+              }}
+            />
           </View>
+        </View>
 
         <KeyboardAwareScrollView
           contentContainerStyle={styles.scrollContent}
@@ -152,7 +152,6 @@ export default function HomeScreen(): React.JSX.Element {
           enableOnAndroid
           keyboardShouldPersistTaps="handled"
           nestedScrollEnabled={true}>
-
           <View
             style={[
               styles.row,
@@ -183,7 +182,7 @@ export default function HomeScreen(): React.JSX.Element {
                 onValueChange={() => setIsEnabled(prev => !prev)}
                 value={isEnabled}
                 style={{
-                  transform: [{ scaleX: 1 }, { scaleY: 1 }],
+                  transform: [{scaleX: 1}, {scaleY: 1}],
                 }}
               />
             </View>
@@ -280,39 +279,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import React, {useContext, useState} from 'react';
 // import {
@@ -453,7 +419,7 @@ const styles = StyleSheet.create({
 //         <ProfileInput
 //           title="Old password: "
 //           onChangeText={text => updateSettings('oldPassword', text)}
-//           value={settings?.about} 
+//           value={settings?.about}
 //         />
 //       )
 //     },
@@ -472,8 +438,8 @@ const styles = StyleSheet.create({
 //   const renderItem = ({ item }) => item.component;
 
 //   return (
-//     <KeyboardAvoidingView 
-//       behavior={Platform.OS === 'ios' ? 'padding' : 'height'} 
+//     <KeyboardAvoidingView
+//       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
 //       style={{
 //         flex: 1
 //       }}
@@ -542,45 +508,3 @@ const styles = StyleSheet.create({
 //     right: 220,
 //   },
 // });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
