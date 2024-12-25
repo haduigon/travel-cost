@@ -27,6 +27,7 @@ export default function HomeScreen(): React.JSX.Element {
       [name]: data,
     }));
   }
+
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   function saveUser() {
