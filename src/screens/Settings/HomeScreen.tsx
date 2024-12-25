@@ -103,7 +103,7 @@ export default function HomeScreen(): React.JSX.Element {
                 zIndex: 1000,
                 position: 'absolute',
               }}
-              flatListProps={{ nestedScrollEnabled: true }}
+                flatListProps={{ nestedScrollEnabled: false, scrollEnabled: false }}
             />
           </View>
         </View>
@@ -146,6 +146,7 @@ export default function HomeScreen(): React.JSX.Element {
                 zIndex: 1000,
                 position: 'absolute',
               }}
+                flatListProps={{ nestedScrollEnabled: false, scrollEnabled: false }}
             />
           </View>
         </View>
