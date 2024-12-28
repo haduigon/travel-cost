@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {
   View,
   Text,
@@ -7,6 +7,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   Alert,
+  TouchableOpacity
 } from 'react-native';
 import {User} from '../../types/types';
 import {AppContext} from '../../context/AppContext';
@@ -15,11 +16,13 @@ import ProfileInput from '../../components/ProfileInput';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import FlyButton from '../../components/FlyButton';
 import {ACTIONS} from '../../helpers/utils';
+import { launchImageLibrary } from 'react-native-image-picker';
 
 export default function HomeScreen(): React.JSX.Element {
   const {state, dispatch} = useContext(AppContext);
   const [user, setUser] = React.useState<User>(state.user);
-  const imageSource = user?.image ? {uri: user.image} : defaultface;
+  const imageSource = user?.image ? { uri: user.image } : defaultface;
+  // const [userImage, setUserImage] = React.useState<string>(user.image);
 
   function updateUser(name: string, data: any) {
     setUser(prevUser => ({
@@ -27,6 +30,10 @@ export default function HomeScreen(): React.JSX.Element {
       [name]: data,
     }));
   }
+
+  useEffect(() => {
+    // setUserImage(imageSource);
+  }, []);
 
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -46,6 +53,22 @@ export default function HomeScreen(): React.JSX.Element {
     Alert.alert('Success', 'We saved your settings');
   }
 
+    const pickImageFromGallery = async () => {
+      try {
+        const result = await launchImageLibrary({
+          mediaType: 'photo',
+          quality: 1,
+        });
+        if (!result.didCancel && result.assets && result.assets[0].uri) {
+          const uri = result.assets[0].uri;
+          updateUser('image', uri);
+          // handleChangeTravel(uri, 'image');
+        }
+      } catch (error) {
+        console.error('Error picking image:', error);
+      }
+    };
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -53,15 +76,17 @@ export default function HomeScreen(): React.JSX.Element {
         flex: 1,
       }}>
       <View style={styles.box}>
-        <Image
-          source={imageSource}
-          style={{
-            width: 120,
-            height: 120,
-            borderRadius: 60,
-            marginTop: 20,
-          }}
-        />
+        <TouchableOpacity onPress={pickImageFromGallery}>
+          <Image
+            source={imageSource}
+            style={{
+              width: 120,
+              height: 120,
+              borderRadius: 60,
+              marginTop: 20,
+            }}
+          />
+        </TouchableOpacity>
         <Text
           style={[
             styles.text,

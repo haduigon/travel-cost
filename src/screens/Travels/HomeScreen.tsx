@@ -16,7 +16,7 @@ const defPic = require('../../assets/pic2.png');
 
 
 function listItem({item, navigation}: {item: any; navigation: any}) {
-  console.log(item, 'item');
+  console.log(item, 'item!!');
 
   return (
     <TouchableOpacity
@@ -79,6 +79,8 @@ export default function HomeScreen({navigation}: any): React.JSX.Element {
 
   useEffect(() => {
     setTravels(state.travels);
+    console.log('travels', state.travels);
+    
   }, [state.travels]);
 
   useEffect(() => {
